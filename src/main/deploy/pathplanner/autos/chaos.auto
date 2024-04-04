@@ -1,0 +1,69 @@
+{
+  "version": 1.0,
+  "startingPose": {
+    "position": {
+      "x": 0.3899353412741913,
+      "y": 1.9554697004130854
+    },
+    "rotation": 180.0
+  },
+  "command": {
+    "type": "sequential",
+    "data": {
+      "commands": [
+        {
+          "type": "parallel",
+          "data": {
+            "commands": [
+              {
+                "type": "named",
+                "data": {
+                  "name": "startShooterAngler"
+                }
+              },
+              {
+                "type": "sequential",
+                "data": {
+                  "commands": [
+                    {
+                      "type": "path",
+                      "data": {
+                        "pathName": "-1.0.0-0.0.1s"
+                      }
+                    },
+                    {
+                      "type": "named",
+                      "data": {
+                        "name": "shoot"
+                      }
+                    },
+                    {
+                      "type": "path",
+                      "data": {
+                        "pathName": "0.0.1s-0.0.[1,5]"
+                      }
+                    },
+                    {
+                      "type": "path",
+                      "data": {
+                        "pathName": "0.0.5-0.0.5s"
+                      }
+                    },
+                    {
+                      "type": "named",
+                      "data": {
+                        "name": "shoot"
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        }
+      ]
+    }
+  },
+  "folder": null,
+  "choreoAuto": false
+}
