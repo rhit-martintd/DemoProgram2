@@ -6,11 +6,21 @@ import com.revrobotics.CANSparkBase.IdleMode;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
-import edu.wpi.first.math.util.Units;
 import frc.lib.util.COTSFalconSwerveConstants;
 import frc.lib.util.SwerveModuleConstants;
+import edu.wpi.first.units.*;
+import static edu.wpi.first.units.Units.Seconds;
+import static edu.wpi.first.units.Units.Volts;
+
+
 
 public final class Constants {
+
+    public static final Measure<Velocity<Voltage>> SYSID_RAMP_RRATE =
+                        Volts.of(1.0).per(Seconds.of(1));
+    public static final Measure<Voltage> SYSID_STEP_VOLTAGE = Volts.of(7);
+    public static final Measure<Time> SYSID_TIMEOUT = Seconds.of(10);
+   
     // TODO: TUNE EVERYTHING!!!!!!!!!
     public static final double STICK_DEADBAND = 0.1;
     public static final double TRIGGER_DEADBAND = 0.5;
@@ -34,10 +44,10 @@ public final class Constants {
 
         public static final COTSFalconSwerveConstants CHOSEN_MODULE =
                 COTSFalconSwerveConstants.SDSMK4i(COTSFalconSwerveConstants.driveGearRatios.SDSMK4i_L2);
-
+        
         /* Drivetrain Constants */
-        public static final double TRACK_WIDTH = Units.inchesToMeters(17.2586);
-        public static final double WHEEL_BASE = Units.inchesToMeters(17.2586);
+        public static final double TRACK_WIDTH = 0.43836844;
+        public static final double WHEEL_BASE = 0.43836844;
         public static final double CENTER_TO_WHEEL =
                 Math.sqrt(Math.pow(WHEEL_BASE / 2.0, 2) + Math.pow(TRACK_WIDTH / 2.0, 2));
         public static final double WHEEL_CIRCUMFERENCE = 
@@ -108,9 +118,9 @@ public final class Constants {
          * Drive Motor Characterization Values
          * Divide SYSID values by 12 to convert from volts to percent output for CTRE
          */
-        public static final double DRIVE_S = (0.16861 / 12);
-        public static final double DRIVE_V = (2.6686 / 12);
-        public static final double DRIVE_A = (0.34757 / 12);
+        public static final double DRIVE_S = (0.16861);
+        public static final double DRIVE_V = (2.6686);
+        public static final double DRIVE_A = (0.34757);
 
         /* Drive Motor Conversion Factors */
         public static final double DRIVE_CONVERSION_POSITION_FACTOR = WHEEL_CIRCUMFERENCE / DRIVE_GEAR_RATIO;

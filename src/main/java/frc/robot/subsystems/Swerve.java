@@ -139,7 +139,7 @@ public class Swerve extends SubsystemBase {
         m_sysIdRoutine =
         new SysIdRoutine(
             // Empty config defaults to 1 volt/second ramp rate and 7 volt step voltage.
-            new SysIdRoutine.Config(),
+            new SysIdRoutine.Config(Constants.SYSID_RAMP_RRATE, Constants.SYSID_STEP_VOLTAGE, Constants.SYSID_TIMEOUT),
             new SysIdRoutine.Mechanism(
                 // Tell SysId how to plumb the driving voltage to the motors.
                 (Measure<Voltage> volts) -> {
@@ -155,35 +155,35 @@ public class Swerve extends SubsystemBase {
                     log.motor("front-left?")
                         .voltage(
                             m_appliedVoltage.mut_replace(
-                                swerveMods[0].getMotor(swerveMods[0]).get() * RobotController.getBatteryVoltage(), Volts))
-                        .linearPosition(m_distance.mut_replace(swerveMods[0].getPosition().distanceMeters, Meters))
-                        .linearVelocity(
-                            m_velocity.mut_replace(swerveMods[0].getMotor(swerveMods[0]).getEncoder().getVelocity(), MetersPerSecond));
-
-                  
-                    log.motor("front-right?")
-                        .voltage(
-                            m_appliedVoltage.mut_replace(
-                                swerveMods[1].getMotor(swerveMods[1]).get() * RobotController.getBatteryVoltage(), Volts))
-                        .linearPosition(m_distance.mut_replace(swerveMods[1].getPosition().distanceMeters, Meters))
-                        .linearVelocity(
-                            m_velocity.mut_replace(swerveMods[1].getMotor(swerveMods[1]).getEncoder().getVelocity(), MetersPerSecond));
-                    
-                            log.motor("back-left?")
-                        .voltage(
-                            m_appliedVoltage.mut_replace(
                                 swerveMods[2].getMotor(swerveMods[2]).get() * RobotController.getBatteryVoltage(), Volts))
                         .linearPosition(m_distance.mut_replace(swerveMods[2].getPosition().distanceMeters, Meters))
                         .linearVelocity(
                             m_velocity.mut_replace(swerveMods[2].getMotor(swerveMods[2]).getEncoder().getVelocity(), MetersPerSecond));
 
-                    log.motor("back-right?")
+                  
+                    log.motor("front-right?")
                         .voltage(
                             m_appliedVoltage.mut_replace(
                                 swerveMods[3].getMotor(swerveMods[3]).get() * RobotController.getBatteryVoltage(), Volts))
                         .linearPosition(m_distance.mut_replace(swerveMods[3].getPosition().distanceMeters, Meters))
                         .linearVelocity(
                             m_velocity.mut_replace(swerveMods[3].getMotor(swerveMods[3]).getEncoder().getVelocity(), MetersPerSecond));
+                    
+                            log.motor("back-left?")
+                        .voltage(
+                            m_appliedVoltage.mut_replace(
+                                swerveMods[0].getMotor(swerveMods[0]).get() * RobotController.getBatteryVoltage(), Volts))
+                        .linearPosition(m_distance.mut_replace(swerveMods[0].getPosition().distanceMeters, Meters))
+                        .linearVelocity(
+                            m_velocity.mut_replace(swerveMods[0].getMotor(swerveMods[0]).getEncoder().getVelocity(), MetersPerSecond));
+
+                    log.motor("back-right?")
+                        .voltage(
+                            m_appliedVoltage.mut_replace(
+                                swerveMods[1].getMotor(swerveMods[1]).get() * RobotController.getBatteryVoltage(), Volts))
+                        .linearPosition(m_distance.mut_replace(swerveMods[1].getPosition().distanceMeters, Meters))
+                        .linearVelocity(
+                            m_velocity.mut_replace(swerveMods[1].getMotor(swerveMods[1]).getEncoder().getVelocity(), MetersPerSecond));
                 },
                 // Tell SysId to make generated commands require this subsystem, suffix test state in
                 // WPILog with this subsystem's name ("drive")
@@ -275,7 +275,7 @@ public class Swerve extends SubsystemBase {
     }
 
     public void setModuleStates(SwerveModuleState[] desiredStates) {
-        setModuleStates(desiredStates, true);
+        setModuleStates(desiredStates, false);
     }
 
     public void resetOdometry(Pose2d pose) {
